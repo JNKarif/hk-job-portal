@@ -1,3 +1,15 @@
+Project name: HK Job Portal
+Live-Link: https://hk-job-portal.vercel.app/
+
+Key- Features:
+1. React JS
+2. React-router-dom
+3. Tailwind CSS
+4. DaisyUI
+5. Firebase
+6. Context API
+7.  Vercel
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
