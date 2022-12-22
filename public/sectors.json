@@ -2,6 +2,7 @@
     {
       "_id": 1,
       "type": "Remote",
+      "require": "Computer/Internet/Skilled",
       "sectors": [
         "Creative industries",
         "Energy Technology",
@@ -14,13 +15,13 @@
         "Software, Hardware",
         "Telecomunications",
         "Translation Services",
-        
         "Other"
       ]
     },
     {
       "_id": 2,
       "type": "Onsite",
+      "require": "18+/fit",
       "sectors": [
         "Manufacturing",
         "Construction Materials",
@@ -62,6 +63,7 @@
     {
       "_id": 3,
       "type": "Hybrid",
+      "require": "Computer/Internet/18+/fit",
       "sectors": [
         "Manufacturing",
         "Construction Materials",
@@ -69,10 +71,7 @@
         "Food and Beverage",
         "Bakery and Confectionary Products",
         "Beverages",
-        "Fish and Fish Products",
-        "Meat and Mear Products",
-        "Milk and Dairy Products",
-        "Sweets and Snack food",
+       
         "Furniture",
         "Bathroom/sauna",
         "Bedroom",

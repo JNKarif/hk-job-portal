@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import ApplyNowModal from './ApplyNowModal/ApplyNowModal';
+import AvailableJob from './AvailableJob';
 
 const AvailableJobs = () => {
+const [availableJobs, setAvailableJobs]=useState([])
+const [jobType, setJobType]=useState({})
+useEffect(()=>{
+    fetch('sectors.json')
+    .then(res=>res.json())
+    .then(data=> setAvailableJobs(data))
+},[])
+
     return (
-        <div className='grid lg:grid-cols-3 gap-3 m-10'>
-            <div className="card w-96 bg-primary text-primary-content">
-  <div className="card-body">
-    <h2 className="card-title">Card title!</h2>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
-    <div className="card-actions justify-end">
-      <button className="btn">Buy Now</button>
-    </div>
-  </div>
-</div>
+       <div className='mt-10 mx-auto'>
+        <p className='text-3xl text-center my-3'>Job Categories</p>
+      
+       <div className='grid lg:grid-cols-3 mb-10 gap-4 '>
+            
+       {
+        availableJobs.map(job=><AvailableJob
+        key={job._id}
+        job={job}
+        setJobType={setJobType}
+        ></AvailableJob>)
+       }
+       
+        </div>
+        <ApplyNowModal
+        jobType={jobType}
+        ></ApplyNowModal>
         </div>
     );
 };
