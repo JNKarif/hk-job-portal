@@ -4,7 +4,7 @@ const ApplyNowModal = ({jobType}) => {
     const {type, require, sectors}=jobType
     
     return (
-        <div>
+        <div className=''>
 {/* Put this part before </body> tag */}
 <input type="checkbox" id="apply-modal" className="modal-toggle" />
 <div className="modal">
@@ -47,7 +47,7 @@ const ApplyNowModal = ({jobType}) => {
  <input type="text" placeholder="Job Experince" className="input input-bordered w-full max-w-sm m-1" required/>
  <input type="text" placeholder="Education" className="input input-bordered w-full max-w-sm m-1" required/>
  <input type="text" placeholder="Skills" className="input input-bordered w-full max-w-sm m-1" required/>
- <input type="url" placeholder="Resume google drive link" className="input input-bordered w-full max-w-sm m-1" required />
+ <input type="url" placeholder="Resume (google drive link)" className="input input-bordered w-full max-w-sm m-1" required />
  <br/>
 
  <div className="form-control my-2">

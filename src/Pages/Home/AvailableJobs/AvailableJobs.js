@@ -12,7 +12,7 @@ useEffect(()=>{
 },[])
 
     return (
-       <div className='mt-10 mx-auto'>
+       <div className='mt-10 '>
         <p className='text-3xl text-center my-3'>Job Categories</p>
       
        <div className='grid lg:grid-cols-3 mb-10 gap-4 '>
