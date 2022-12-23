@@ -4,7 +4,7 @@ import AvailableJob from './AvailableJob';
 
 const AvailableJobs = () => {
 const [availableJobs, setAvailableJobs]=useState([])
-const [jobType, setJobType]=useState({})
+const [jobType, setJobType]=useState(null)
 useEffect(()=>{
     fetch('sectors.json')
     .then(res=>res.json())
@@ -26,9 +26,14 @@ useEffect(()=>{
        }
        
         </div>
-        <ApplyNowModal
-        jobType={jobType}
-        ></ApplyNowModal>
+        {
+            jobType &&
+            <ApplyNowModal
+            jobType={jobType}
+            setJobType={setJobType}
+            ></ApplyNowModal>
+        }
+        
         </div>
     );
 };
