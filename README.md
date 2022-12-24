@@ -6,9 +6,9 @@ Key- Features:
 2. React-router-dom
 3. Tailwind CSS
 4. DaisyUI
-5. Firebase
+5. Firebase Authentication Email/ Password and Google
 6. Context API
-7.  Vercel
+7. Vercel
 
 # Getting Started with Create React App
 
