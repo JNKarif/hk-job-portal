@@ -1,5 +1,7 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, {  useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
@@ -7,7 +9,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 const Login = () => {
 
   const { register, formState: { errors }, handleSubmit } = useForm();
-  const { signIn } = useContext(AuthContext);
+  const { user, signIn, providerLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,6 +30,24 @@ const Login = () => {
               setLoginError(error.message);
           });
   }
+
+
+  const googleProvider = new GoogleAuthProvider()
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                // saveUser(user.displayName, user.email, 'buyer')
+                // saveUser(user.displayName, user.email, user.role)
+                // setCreatedUserEmail(user.email)
+                toast.success(`${user.displayName}'s Google login successfull`)
+                navigate('/')
+            })
+            .catch(err => console.error(err))
+    }
+
     return (
       <div className='h-[800px] flex justify-center items-center'>
       <div className='w-96 p-7'>
@@ -60,7 +80,7 @@ const Login = () => {
           </form>
           <p>New to HK Job Portal <Link className='text-secondary' to="/signup">Create new Account</Link></p>
           <div className="divider">OR</div>
-          <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+          <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
       </div>
   </div>
     );

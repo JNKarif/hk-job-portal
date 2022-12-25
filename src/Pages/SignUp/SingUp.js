@@ -1,14 +1,18 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser } = useContext(AuthContext);
+    const { createUser, updateUser, providerLogin } = useContext(AuthContext);
+    const navigate = useNavigate()
     const [signUpError, setSignUPError] = useState('')
+
     const handleSignUp = (data) => {
         console.log(data);
         setSignUPError('');
@@ -16,7 +20,11 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast('User Created Successfully.')
+                if (user) {
+                    toast('User Created Successfully.')
+                    navigate('/')
+                }
+
                 // const userInfo = {
                 //     displayName: data.name
                 // }
@@ -29,6 +37,24 @@ const SignUp = () => {
                 setSignUPError(error.message)
             });
     }
+
+
+    const googleProvider = new GoogleAuthProvider()
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                // saveUser(user.displayName, user.email, 'buyer')
+                // saveUser(user.displayName, user.email, user.role)
+                // setCreatedUserEmail(user.email)
+                toast.success(`${user.displayName}'s Google login successfull`)
+                navigate('/')
+            })
+            .catch(err => console.error(err))
+    }
+
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -63,7 +89,7 @@ const SignUp = () => {
                 </form>
                 <p>Already have an account <Link className='text-primary' to="/login">Please Login</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
 
             </div>
         </div>
