@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../../../Context/AuthProvider';
 
 
 
@@ -9,8 +11,8 @@ import React from 'react';
 const ApplyNowModal = ({ jobType, setJobType }) => {
   const { type, require, sectors } = jobType
 
-  
-  
+  const { user } = useContext(AuthContext)
+
   const handleApplyNow = event => {
     event.preventDefault()
     const form = event.target;
@@ -24,12 +26,12 @@ const ApplyNowModal = ({ jobType, setJobType }) => {
     const desiredJob = form.desiredJob.value;
     const previousJob = form.previousJob.value;
     const urlResume = form.urlResume.value
-  
-  
+
+
     // console.log(name, email, mobile, address, experience,
     // education, skill, desiredJob, previousJob, urlResume)
-  
-    const applyNow = {
+
+    const candidatesData = {
       name,
       email,
       mobile,
@@ -40,21 +42,36 @@ const ApplyNowModal = ({ jobType, setJobType }) => {
       previousJob,
       urlResume
     }
-/* we have to send data to the server and once data is saved then close the modal 
-and show a toast of confirmantion*/
+    /* we have to send data to the server and once data is saved then close the modal 
+    and show a toast of confirmantion*/
+
+    fetch('http://localhost:5000/candidatesData', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(candidatesData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data.acknowledged) {
+          setJobType(null)
+          toast.success('Your application was submitted successfully')
+        }
+      })
 
 
-setJobType(null)
   }
-  
-  
-  
+
+
+
   return (
     <div className=''>
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="apply-modal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box  max-w-4xl relative">
+        <div className="modal-box  max-w-5xl relative">
           <label htmlFor="apply-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
           <h3 className="font-bold text-lg">Job-Type: {type} | Primary requirements: {require} </h3>
 
@@ -65,37 +82,105 @@ setJobType(null)
     <span className="label-text">Pick the best fantasy franchise</span>
     <span className="label-text-alt">Alt label</span>
   </label> */}
-            <select name='desiredJob' className="select select-bordered w-full max-w-sm m-1 " required>
-              <option disabled selected>Select your desired job sector</option>
-              {
-                sectors?.map((sector, i) =>
-                  <option
-                    key={i}
-                  > {sector}</option>
-                )
-              }
-            </select>
+            <div className='grid lg:grid-cols-2 gap-2'>
+              <div>
+                <label className="label">
+                  <span className="label-text">Select your desired job sector</span>
+                </label>
+                <select name='desiredJob' required className="select select-bordered w-full max-w-sm m-1 " >
+                  {
+                    sectors?.map((sector, i) =>
+                      <option
+                        key={i}
+                      > {sector}</option>
+                    )
+                  }
+                </select>
+              </div>
 
 
-            <select name='previousJob' className="select select-bordered w-full max-w-sm m-1 " required>
-              <option disabled selected>Select your previous job sector</option>
-              {
-                sectors?.map((sector, i) =>
-                  <option
-                    key={i}
-                  > {sector}</option>
-                )
-              }
-            </select>
+              <div>
+                <label className="label">
+                  <span className="label-text">Select your previous job sector</span>
+                </label>
+                <select name='previousJob' required className="select select-bordered w-full max-w-sm m-1 " >
+                  {
+                    sectors?.map((sector, i) =>
+                      <option
+                        key={i}
+                      > {sector}</option>
+                    )
+                  }
+                </select>
+              </div>
 
-            <input type="text" name='name' placeholder="Your Full Name" className="input input-bordered w-full max-w-sm m-1" required />
-            <input type="email" name='email' placeholder="Your Email" className="input input-bordered w-full max-w-sm  m-1" required />
-            <input type="text" name='mobile' placeholder="Your Mobile Number" className="input input-bordered w-full max-w-sm m-1" required />
-            <input type="text" name='address' placeholder="Your Address" className="input input-bordered w-full max-w-sm m-1" required />
-            <input type="text" name='experience' placeholder="Job Experince" className="input input-bordered w-full max-w-sm m-1" required />
-            <input type="text" name='education' placeholder="Education" className="input input-bordered w-full max-w-sm m-1" required />
-            <input type="text" name='skill' placeholder="Skills" className="input input-bordered w-full max-w-sm m-1" required />
-            <input type="url" name='urlResume' placeholder="Resume (google drive link)" className="input input-bordered w-full max-w-sm m-1" required />
+
+              <div>
+                <label className="label">
+                  <span className="label-text">Full Name</span>
+                </label>
+                <input type="text" name='name' placeholder="Your Full Name" className="input input-bordered w-full max-w-sm m-1" required />
+              </div>
+
+              <div>
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input type="email" name='email' placeholder="Your Email" defaultValue={user?.email} disabled
+                  className="input input-bordered w-full max-w-sm  m-1" required />
+              </div>
+
+
+              <div>
+                <label className="label">
+                  <span className="label-text">Mobile Number</span>
+                </label>
+                <input type="text" name='mobile' placeholder="Your Mobile Number"
+                  className="input input-bordered w-full max-w-sm m-1" required />
+              </div>
+
+              <div>
+                <label className="label">
+                  <span className="label-text">Address</span>
+                </label>
+                <input type="text" name='address' placeholder="Your Address" className="input input-bordered w-full max-w-sm m-1" required />
+              </div>
+
+              <div>
+                <label className="label">
+                  <span className="label-text">Years of Job Experince</span>
+                </label>
+                <input type="text" name='experience' placeholder="Job Experince" className="input input-bordered w-full max-w-sm m-1" required />
+              </div>
+
+
+              <div>
+                <label className="label">
+                  <span className="label-text">Education</span>
+                </label>
+                <input type="text" name='education' placeholder="Education" className="input input-bordered w-full max-w-sm m-1" required />
+              </div>
+
+
+              <div>
+                <label className="label">
+                  <span className="label-text">Skills</span>
+                </label>
+                <input type="text" name='skill' placeholder="Skills" className="input input-bordered w-full max-w-sm m-1" required />
+              </div>
+
+
+              <div>
+                <label className="label">
+                  <span className="label-text">Resume Link</span>
+                </label>
+                <input type="url" name='urlResume' placeholder="Resume (google drive link)"
+                  className="input input-bordered w-full max-w-sm m-1" required />
+              </div>
+
+            </div>
+
+
             <br />
 
             <div className="form-control my-2">

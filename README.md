@@ -9,6 +9,11 @@ Key- Features:
 5. Firebase Authentication Email/ Password and Google
 6. Context API
 7. Vercel
+8. dark/light theme toggle
+9. MongoDB
+10. Node JS
+11. Express JS
+
 
 # Getting Started with Create React App
 

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import {AuthContext} from '../../../Context/AuthProvider'
 
 const AvailableJob = ({job, setJobType}) => {
+  const {user}=useContext(AuthContext)
     const {type, require, sectors}=job
     return (
         <div>
@@ -11,8 +14,10 @@ const AvailableJob = ({job, setJobType}) => {
     <p>{sectors.length} jobs available</p>
     <div className="card-actions justify-end">
       
+
+
       <label htmlFor="apply-modal" className="btn "
-      onClick={()=>setJobType(job)}
+      onClick={()=>setJobType(job)} 
       >Apply Now</label>
     </div>
   </div>

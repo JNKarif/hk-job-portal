@@ -25,12 +25,12 @@ const SignUp = () => {
                     navigate('/')
                 }
 
-                // const userInfo = {
-                //     displayName: data.name
-                // }
-                // updateUser(userInfo)
-                //     .then(() => { })
-                //     .catch(err => console.log(err));
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {})
+                    .catch(err => console.log(err));
             })
             .catch(error => {
                 console.log(error)

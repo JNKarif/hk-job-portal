@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthProvider';
 import ApplyNowModal from './ApplyNowModal/ApplyNowModal';
 import AvailableJob from './AvailableJob';
 
 const AvailableJobs = () => {
 const [availableJobs, setAvailableJobs]=useState([])
+const {user}= useContext(AuthContext)
+const navigate = useNavigate()
+
 const [jobType, setJobType]=useState(null)
 useEffect(()=>{
-    fetch('sectors.json')
+    fetch('http://localhost:5000/jobSectors')
     .then(res=>res.json())
     .then(data=> setAvailableJobs(data))
 },[])
@@ -27,11 +33,13 @@ useEffect(()=>{
        
         </div>
         {
-            jobType &&
-            <ApplyNowModal
-            jobType={jobType}
-            setJobType={setJobType}
-            ></ApplyNowModal>
+            jobType && <>{ user ?
+                <ApplyNowModal
+                jobType={jobType}
+                setJobType={setJobType}
+                ></ApplyNowModal> : navigate('/login')
+            }
+            </> 
         }
         
         </div>
