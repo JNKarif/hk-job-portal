@@ -39,6 +39,7 @@ useEffect(()=>{
                 setJobType={setJobType}
                 ></ApplyNowModal> : navigate('/login')
             }
+
             </> 
         }
         
