@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../Context/AuthProvider';
 
 
@@ -10,13 +11,13 @@ import { AuthContext } from '../../../../Context/AuthProvider';
 
 const ApplyNowModal = ({ jobType, setJobType }) => {
   const { type, require, sectors } = jobType
-
   const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleApplyNow = event => {
     event.preventDefault()
     const form = event.target;
-    const name = form.name.value;
+    const displayName = form.displayName.value;
     const email = form.email.value;
     const mobile = form.mobile.value;
     const address = form.address.value;
@@ -32,7 +33,7 @@ const ApplyNowModal = ({ jobType, setJobType }) => {
     // education, skill, desiredJob, previousJob, urlResume)
 
     const candidatesData = {
-      name,
+      displayName,
       email,
       mobile,
       address, experience,
@@ -40,7 +41,10 @@ const ApplyNowModal = ({ jobType, setJobType }) => {
       skill,
       desiredJob,
       previousJob,
-      urlResume
+      urlResume,
+      type,
+      require,
+
     }
     /* we have to send data to the server and once data is saved then close the modal 
     and show a toast of confirmantion*/
@@ -58,6 +62,7 @@ const ApplyNowModal = ({ jobType, setJobType }) => {
         if (data.acknowledged) {
           setJobType(null)
           toast.success('Your application was submitted successfully')
+          navigate('/myappliedjob')
         }
       })
 
@@ -119,7 +124,7 @@ const ApplyNowModal = ({ jobType, setJobType }) => {
                 <label className="label">
                   <span className="label-text">Full Name</span>
                 </label>
-                <input type="text" name='name' placeholder="Your Full Name" className="input input-bordered w-full max-w-sm m-1" required />
+                <input type="text" name='displayName' placeholder="Your Full Name" className="input input-bordered w-full max-w-sm m-1" required />
               </div>
 
               <div>
