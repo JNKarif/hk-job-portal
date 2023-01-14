@@ -12,9 +12,11 @@ const navigate = useNavigate()
 
 const [jobType, setJobType]=useState(null)
 useEffect(()=>{
-    fetch('http://localhost:5000/jobSectors')
+    fetch('https://hk-job-portal-server.vercel.app/jobSectors')
     .then(res=>res.json())
-    .then(data=> setAvailableJobs(data))
+    .then(data=>
+         { console.log(data)
+            setAvailableJobs(data)})
 },[])
 
     return (

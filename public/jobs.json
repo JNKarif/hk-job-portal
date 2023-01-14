@@ -1,0 +1,72 @@
+[
+    {
+        "title": "Software Engineer",
+        "company": "Google",
+        "salary": "$120,000",
+        "jobType": "Full-time",
+        "eligibility": "Bachelor's degree in Computer Science or related field",
+        "programmingLanguages": [
+            "Java",
+            "C++"
+        ],
+        "frameworks": [
+            "AngularJS",
+            "ReactJS"
+        ]
+    },
+    {
+        "title": "Data Analyst",
+        "company": "Facebook",
+        "salary": "$90,000",
+        "jobType": "Remote",
+        "eligibility": "Bachelor's degree in Statistics, Mathematics, or related field",
+        "programmingLanguages": [
+            "Python",
+            "R"
+        ],
+        "frameworks": [
+            "Pandas",
+            "Scikit-learn"
+        ]
+    },
+    {
+        "title": "Product Manager",
+        "company": "Amazon",
+        "salary": "$150,000",
+        "jobType": "Onsite",
+        "eligibility": "Bachelor's degree in Business Administration or related field",
+        "programmingLanguages": [
+            "JavaScript"
+        ],
+        "frameworks": [
+            "React Native"
+        ]
+    },
+    {
+        "title": "Nurse Practitioner",
+        "company": "Hospital",
+        "salary": "$95,000",
+        "jobType": "Full-time",
+        "eligibility": "Master's degree in Nursing",
+        "certification": [
+            "NP",
+            "RN"
+        ]
+    },
+    {
+        "title": "Civil Engineer",
+        "company": "Construction Company",
+        "salary": "$110,000",
+        "jobType": "Full-time",
+        "eligibility": "Bachelor's degree in Civil Engineering",
+        "experience": "5 years of experience in construction industry"
+    },
+    {
+        "title": "Marketing Manager",
+        "company": "Advertising Agency",
+        "salary": "$120,000",
+        "jobType": "Hybrid",
+        "eligibility": "Bachelor's degree in Marketing or related field",
+        "experience": "7 years of experience in marketing industry"
+    }
+]

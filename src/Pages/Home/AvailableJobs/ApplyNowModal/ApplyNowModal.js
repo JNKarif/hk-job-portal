@@ -49,7 +49,7 @@ const ApplyNowModal = ({ jobType, setJobType }) => {
     /* we have to send data to the server and once data is saved then close the modal 
     and show a toast of confirmantion*/
 
-    fetch('http://localhost:5000/candidatesData', {
+    fetch('https://hk-job-portal-server.vercel.app/candidatesData', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
